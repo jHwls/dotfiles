@@ -24,6 +24,7 @@ call minpac#add('itchyny/lightline.vim')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-repeat')
+call minpac#add('tpope/vim-commentary')
 
 call minpac#add('mattn/emmet-vim')
 
