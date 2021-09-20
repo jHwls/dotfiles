@@ -16,6 +16,8 @@ call minpac#init()
 
 call minpac#add('jcherven/jummidark.vim')
 
+call minpac#add('christoomey/vim-tmux-navigator')
+
 call minpac#add('tpope/vim-vinegar')
 call minpac#add('moll/vim-bbye')
 call minpac#add('ctrlpvim/ctrlp.vim')
