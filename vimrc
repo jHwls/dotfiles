@@ -41,6 +41,7 @@ call minpac#add('MaxMEllon/vim-jsx-pretty')
 call minpac#add('HerringtonDarkholme/yats.vim') "typescript
 call minpac#add('elixir-editors/vim-elixir')
 call minpac#add('mhinz/vim-mix-format')
+call minpac#add('leafOfTree/vim-svelte-plugin')
 "===============================================================================
 "MAPPINGS
 imap jk <esc>
@@ -96,6 +97,7 @@ set shiftround					" Round indent to a multiple of 'shiftwidth'
 
 set splitright					" Open new vertical splits to the right
 set splitbelow					" Open new horizontal splits underneath
+
 "===============================================================================
 "COMMANDS
 command! PackUpdate call minpac#update()
