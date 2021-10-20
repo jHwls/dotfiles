@@ -23,6 +23,9 @@ call minpac#add('moll/vim-bbye')
 call minpac#add('ctrlpvim/ctrlp.vim')
 call minpac#add('itchyny/lightline.vim')
 
+call minpac#add('mhinz/vim-startify')
+call minpac#add('gcmt/taboo.vim')
+
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-repeat')
@@ -98,6 +101,7 @@ set shiftround					" Round indent to a multiple of 'shiftwidth'
 set splitright					" Open new vertical splits to the right
 set splitbelow					" Open new horizontal splits underneath
 
+set sessionoptions+=tabpages,globals " Saves tab names
 "===============================================================================
 "COMMANDS
 command! PackUpdate call minpac#update()
