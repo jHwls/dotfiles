@@ -45,6 +45,10 @@ call minpac#add('HerringtonDarkholme/yats.vim') "typescript
 call minpac#add('elixir-editors/vim-elixir')
 call minpac#add('mhinz/vim-mix-format')
 call minpac#add('leafOfTree/vim-svelte-plugin')
+
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
 "===============================================================================
 "MAPPINGS
 imap jk <esc>
@@ -114,6 +118,8 @@ autocmd Filetype qf nnoremap <buffer> q :q<CR>
 
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm,*.njk set ft=jinja
 
+autocmd BufWritePost *.exs silent :!mix format %
+autocmd BufWritePost *.ex silent :!mix format %
 "===============================================================================
 "COC
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
