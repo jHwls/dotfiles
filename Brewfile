@@ -1,5 +1,6 @@
 brew "asdf"
 brew "exercism"
+brew "fswatch"
 brew "gh"
 brew "git"
 brew "git-flow-avh"
