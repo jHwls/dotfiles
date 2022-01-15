@@ -158,6 +158,10 @@ let g:ale_elixir_elixir_ls_release = expand("~/repos/elixir-ls/rel")
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 
+" Use tab for autocomplete match selection
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+
 nnoremap dt :ALEGoToDefinition<cr>
 nnoremap df :ALEFix<cr>
 nnoremap K :ALEHover<cr>
@@ -191,5 +195,3 @@ let g:lightline.active = {
       \ [ 'lineinfo' ],
 	    \ [ 'percent' ],
 	    \ [ 'fileformat', 'fileencoding', 'filetype'] ] }
-
-
