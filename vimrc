@@ -1,4 +1,5 @@
 "VIMRC
+set directory=$HOME/.vim/swp/
 
 let mapleader = "\<Space>"
 
@@ -51,6 +52,8 @@ imap jk <esc>
 imap kj <esc>
 imap <C-s> <esc>:w<cr>
 
+nmap ww :w<CR>
+
 
 " 0 goes to first character, not 0th column
 nmap 0 ^
@@ -58,6 +61,10 @@ nmap 0 ^
 " Move up and down by visible lines if current line is wrapped
 nmap j gj
 nmap k gk
+
+" Stop starting macros all the time on accident
+nnoremap Q q
+nnoremap q <Nop>
 
 " Tabedit your vimrc. Type space, v, r in sequence to trigger
 nmap <leader>vr :tabedit $MYVIMRC<cr>
@@ -150,6 +157,7 @@ let g:ale_linters.elixir = ['elixir-ls', 'credo']
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
 let g:ale_fixers.html = ['prettier']
+let g:ale_fixers["jinja.html"] = ['prettier']
 let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elixir = ['mix_format']
