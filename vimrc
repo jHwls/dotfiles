@@ -92,6 +92,12 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " Projectionist mapping
 nnoremap <C-s> :A<cr>
+
+" Line split regex shortcuts
+nnoremap <C-f> <Nop>
+nnoremap <C-f>p :s/<Bar>/\r<Bar>/g<CR> =[[
+nnoremap <C-f>c :s/,/,\r/g<CR>=[[
+nnoremap <C-f>f :s/\([,\(]\)/\1\r/g<CR>=a %i<CR><Esc> $
 "===============================================================================
 "SETTINGS
 colorscheme jummidark
