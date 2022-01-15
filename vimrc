@@ -31,6 +31,7 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-projectionist')
 
 call minpac#add('mattn/emmet-vim')
 
@@ -88,6 +89,9 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" Projectionist mapping
+nnoremap <C-s> :A<cr>
 "===============================================================================
 "SETTINGS
 colorscheme jummidark
