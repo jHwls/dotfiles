@@ -6,3 +6,6 @@ autoload -U promptinit; promptinit
 prompt pure
 
 source $HOME/repos/dotfiles/aliases
+
+# The next line updates PATH for Netlify's Git Credential Helper.
+if [ -f '~/.netlify/helper/path.zsh.inc' ]; then source '~/.netlify/helper/path.zsh.inc'; fi
