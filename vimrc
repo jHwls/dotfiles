@@ -43,6 +43,7 @@ call minpac#add('HerringtonDarkholme/yats.vim') "typescript
 call minpac#add('elixir-editors/vim-elixir')
 call minpac#add('leafOfTree/vim-svelte-plugin')
 
+call minpac#add('vim-test/vim-test')
 "===============================================================================
 "MAPPINGS
 imap jk <esc>
@@ -81,6 +82,12 @@ nnoremap <c-p> :Files<cr>
 " Shortcut for closing buffers
 nnoremap <Leader>q :Bdelete<CR>
 
+" VimTest mappings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 "===============================================================================
 "SETTINGS
 colorscheme jummidark
