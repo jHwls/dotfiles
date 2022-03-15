@@ -159,17 +159,21 @@ let g:ale_linters.elixir = ['elixir-ls', 'credo']
 
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
+let g:ale_fixers.svelte = ['eslint', 'prettier']
+let g:ale_fixers.typescript = ['eslint', 'prettier']
+let g:ale_fixers.typescriptreact = ['eslint', 'prettier']
 let g:ale_fixers.html = ['prettier']
 let g:ale_fixers["jinja.html"] = ['prettier']
 let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
-let g:ale_fixers.elixir = ['mix_format']
 
 let g:ale_sign_column_always = 1
 let g:ale_elixir_credo_strict = 1
+let g:ale_fix_on_save = 1
 
 " Required, tell ALE where to find Elixir LS
 let g:ale_elixir_elixir_ls_release = expand("~/repos/elixir-ls/rel")
+let g:vim_elixir_ls_elixir_ls_dir = expand("~/repos/elixir-ls")
 
 " Optional, configure as-you-type completions
 set completeopt=menu,menuone,preview,noselect,noinsert
