@@ -46,6 +46,9 @@ call minpac#add('elixir-editors/vim-elixir')
 call minpac#add('leafOfTree/vim-svelte-plugin')
 
 call minpac#add('vim-test/vim-test')
+
+call minpac#add('mhinz/vim-mix-format')
+let g:mix_format_on_save = 1
 "===============================================================================
 "MAPPINGS
 imap jk <esc>
