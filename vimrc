@@ -55,8 +55,7 @@ imap jk <esc>
 imap kj <esc>
 imap <C-s> <esc>:w<cr>
 
-nmap ww :w<CR>
-
+nmap qq :update<CR>
 
 " 0 goes to first character, not 0th column
 nmap 0 ^
