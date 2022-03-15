@@ -80,6 +80,10 @@ nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
 " Inserts a new line below the current one without entering insert mode
 nmap oo o<Esc>k
 
+" Move visual selection
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+
 " Quicker window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
