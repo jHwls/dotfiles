@@ -2,3 +2,5 @@ alias myip='host myip.opendns.com resolver1.opendns.com'
 alias tx=tmuxinator
 alias browse='open -a /Applications/Firefox\ Developer\ Edition.App'
 alias psql='psql -U postgres -d postgres'
+alias servex='elixir --sname web -S mix phx.server'
+alias meshex='iex --sname iex --remsh web@jM1'
