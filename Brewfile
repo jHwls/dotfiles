@@ -12,9 +12,12 @@ brew "neofetch"
 brew "openssl@1.1"
 brew "pnpm"
 brew "pure"
+brew "pgloader"
 brew "rename"
 brew "the_silver_searcher"
 brew "tmux"
+
+cask "1password/tap/1password-cli"
 
 tap "nexeck/homebrew-tmuxinator"
 brew "nexeck/homebrew-tmuxinator/tmuxinator"

@@ -10,16 +10,21 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/]\.git$',
 	\ }
 
+let g:NERDTreeWinPos = "right"
+
 "===============================================================================
 "PLUGINS
 packadd minpac
 call minpac#init()
 
+call minpac#add('preservim/nerdtree')
+call minpac#add('PhilRunninger/nerdtree-buffer-ops')
+
 call minpac#add('jcherven/jummidark.vim')
 
 call minpac#add('christoomey/vim-tmux-navigator')
 
-call minpac#add('tpope/vim-vinegar')
+" call minpac#add('tpope/vim-vinegar')
 call minpac#add('moll/vim-bbye')
 call minpac#add('ctrlpvim/ctrlp.vim')
 call minpac#add('itchyny/lightline.vim')
@@ -44,13 +49,24 @@ call minpac#add('MaxMEllon/vim-jsx-pretty')
 call minpac#add('HerringtonDarkholme/yats.vim') "typescript
 call minpac#add('elixir-editors/vim-elixir')
 call minpac#add('leafOfTree/vim-svelte-plugin')
+call minpac#add('hashivim/vim-terraform')
 
 call minpac#add('vim-test/vim-test')
 
 call minpac#add('mhinz/vim-mix-format')
 let g:mix_format_on_save = 1
+let g:mix_format_silent_errors = 1
+let g:mix_format_options = ''
+
+call minpac#add('junegunn/vim-easy-align')
+
 "===============================================================================
 "MAPPINGS
+nnoremap - :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
 imap jk <esc>
 imap kj <esc>
 imap <C-s> <esc>:w<cr>
@@ -111,6 +127,13 @@ nnoremap <C-f> <Nop>
 nnoremap <C-f>p :s/<Bar>/\r<Bar>/g<CR> =[[
 nnoremap <C-f>c :s/,/,\r/g<CR>=[[
 nnoremap <C-f>f :s/\([,\(]\)/\1\r/g<CR>=a %i<CR><Esc> $
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 "===============================================================================
 "SETTINGS
 colorscheme jummidark
@@ -151,32 +174,20 @@ autocmd Filetype qf nnoremap <buffer> q :q<CR>
 
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm,*.njk set ft=jinja
 
-"autocmd BufWritePost *.exs silent :!mix format %
-"autocmd BufWritePost *.ex silent :!mix format %
-
 "===============================================================================
 "ALE
-" Required, explicitly enable Elixir LS
-let g:ale_linters = {}
-let g:ale_linters.elixir = ['elixir-ls', 'credo']
-
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
 let g:ale_fixers.svelte = ['eslint', 'prettier']
 let g:ale_fixers.typescript = ['eslint', 'prettier']
 let g:ale_fixers.typescriptreact = ['eslint', 'prettier']
-let g:ale_fixers.html = ['prettier']
-let g:ale_fixers["jinja.html"] = ['prettier']
 let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
 
 let g:ale_sign_column_always = 1
 let g:ale_elixir_credo_strict = 1
 let g:ale_fix_on_save = 1
-
-" Required, tell ALE where to find Elixir LS
-let g:ale_elixir_elixir_ls_release = expand("~/repos/elixir-ls/rel")
-let g:vim_elixir_ls_elixir_ls_dir = expand("~/repos/elixir-ls")
+let g:ale_fix_on_save = 1
 
 " Optional, configure as-you-type completions
 set completeopt=menu,menuone,preview,noselect,noinsert
@@ -186,8 +197,8 @@ let g:ale_completion_enabled = 1
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
-nnoremap dt :ALEGoToDefinition<cr>
-nnoremap df :ALEFix<cr>
+" nnoremap dt :ALEGoToDefinition<cr>
+" nnoremap df :ALEFix<cr>
 nnoremap K :ALEHover<cr>
 
 "===============================================================================
