@@ -62,7 +62,7 @@ call minpac#add('junegunn/vim-easy-align')
 
 "===============================================================================
 "MAPPINGS
-nnoremap - :NERDTreeFocus<CR>
+nnoremap - :NERDTreeFind<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
