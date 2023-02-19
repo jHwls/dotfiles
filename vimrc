@@ -18,6 +18,7 @@ packadd minpac
 call minpac#init()
 
 call minpac#add('preservim/nerdtree')
+call minpac#add('jremmen/vim-ripgrep')
 call minpac#add('PhilRunninger/nerdtree-buffer-ops')
 
 call minpac#add('jcherven/jummidark.vim')
@@ -177,17 +178,8 @@ au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm,*.njk set ft=jinja
 "===============================================================================
 "ALE
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_fixers.javascript = ['eslint', 'prettier']
-let g:ale_fixers.svelte = ['eslint', 'prettier']
-let g:ale_fixers.typescript = ['eslint', 'prettier']
-let g:ale_fixers.typescriptreact = ['eslint', 'prettier']
-let g:ale_fixers.scss = ['stylelint']
-let g:ale_fixers.css = ['stylelint']
-
 let g:ale_sign_column_always = 1
-let g:ale_elixir_credo_strict = 1
-let g:ale_fix_on_save = 1
-let g:ale_fix_on_save = 1
+
 
 " Optional, configure as-you-type completions
 set completeopt=menu,menuone,preview,noselect,noinsert
