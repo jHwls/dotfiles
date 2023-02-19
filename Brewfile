@@ -19,6 +19,7 @@ brew "the_silver_searcher"
 brew "zellij"
 
 cask "1password/tap/1password-cli"
+cask "alacritty"
 
 cask "ngrok"
 
