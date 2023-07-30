@@ -34,6 +34,8 @@ call minpac#add('maximbaz/lightline-ale')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('gcmt/taboo.vim')
 
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-rhubarb')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-repeat')
@@ -60,6 +62,9 @@ let g:mix_format_silent_errors = 1
 let g:mix_format_options = ''
 
 call minpac#add('junegunn/vim-easy-align')
+
+call minpac#add('wuelnerdotexe/vim-astro')
+let g:astro_typescript = 'enable'
 
 "===============================================================================
 "MAPPINGS
@@ -148,7 +153,7 @@ filetype plugin indent on
 set re=0
 set laststatus=2				" Show status line
 set nocompatible				" Don't maintain compatibilty with Vi.
-set textwidth=80				" Make it obvious where 80 characters is
+set textwidth=120				" Make it obvious where 80 characters is
 set colorcolumn=+1
 set number							" Display line numbers beside buffer
 set hidden							" Allow buffer change w/o saving
