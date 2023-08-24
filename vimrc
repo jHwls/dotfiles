@@ -131,9 +131,26 @@ call minpac#add("mattn/emmet-vim")
 # [Vim-Startify](https://github.com/mhinz/vim-startify)
 # The fancy start screen for Vim.
 call minpac#add("mhinz/vim-startify")
+
+function ListCommits()
+    let git = 'git -C ~/repo'
+    let commits = systemlist(git .' log --oneline | head -n10')
+    let git = 'G'. git[1:]
+    return map(commits, '{"line": matchstr(v:val, "\\s\\zs.*"), "cmd": "'. git .' show ". matchstr(v:val, "^\\x\\+") }')
+endfunction
+
 g:startify_change_to_dir = 0
 g:startify_bookmarks = [
 	{ "v": "~/.vimrc" }
+]
+g:startify_custom_indices = ['f', 'g', 'h']
+g:startify_lists = [
+ { type: "dir",                   header: [printf("   %s", fnamemodify(getcwd(), ":~:."))] },
+ { type: "bookmarks",             header: ["   Bookmarks"]      },
+ { type: function("ListCommits"), header: ["   GitLog"] },
+ { type: "sessions",              header: ["   Sessions"]       },
+ { type: "files",                 header: ["   MRU"]            },
+ { type: "commands",              header: ["   Commands"]       }
 ]
 nmap <silent> <leader>s :Startify<CR>
 
