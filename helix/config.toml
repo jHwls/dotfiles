@@ -1,0 +1,25 @@
+theme = "juumi_dark"
+
+[editor]
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.normal]
+# C-s = ":w" # Maps Ctrl-s to the typable command :w which is an alias for :write (save file)
+# C-o = ":open ~/.config/helix/config.toml" # Maps Ctrl-o to opening of the helix config file
+"C-j" = "jump_view_down"
+"C-k" = "jump_view_up"
+"C-h" = "jump_view_left"
+"C-l" = "jump_view_right"
+"C-S-esc" = "extend_line" # Maps Ctrl-Shift-Escape to extend_line
+"ret" = ["open_below", "normal_mode"] # Maps the enter key to open_below then re-enter normal mode
+
+[keys.insert]
+j = { k = "normal_mode" }

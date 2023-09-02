@@ -1,0 +1,121 @@
+inherits = "base16_default"
+
+"ui.background" = { bg = "low_gray_2" }
+# "ui.background.separator"	#Picker separator below input line
+"ui.cursor" = { modifiers = ["reversed"] }
+# "ui.cursor.normal"	
+# "ui.cursor.insert"	
+# "ui.cursor.select"	
+# "ui.cursor.match"	#Matching bracket etc.
+# "ui.cursor.primary"	#Cursor with primary selection
+# "ui.cursor.primary.normal"	
+# "ui.cursor.primary.insert"	
+# "ui.cursor.primary.select"	
+# "ui.debug.breakpoint"	#Breakpoint indicator, found in the gutter
+# "ui.debug.active"	#Indicator for the line at which debugging execution is paused at, found in the gutter
+# "ui.gutter"	#Gutter
+# "ui.gutter.selected"	#Gutter for the line the cursor is on
+# "ui.highlight.frameline"	#Line at which debugging execution is paused at
+# "ui.linenr"	#Line numbers
+# "ui.linenr.selected"	#Line number for the line the cursor is on
+# "ui.statusline"	#Statusline
+# "ui.statusline.inactive"	#Statusline (unfocused document)
+# "ui.statusline.normal"	#Statusline mode during normal mode (only if editor.color-modes is enabled)
+# "ui.statusline.insert"	#Statusline mode during insert mode (only if editor.color-modes is enabled)
+# "ui.statusline.select"	#Statusline mode during select mode (only if editor.color-modes is enabled)
+# "ui.statusline.separator"	#Separator character in statusline
+# "ui.popup"	#Documentation popups (e.g. Space + k)
+# "ui.popup.info"	#Prompt for multiple key options
+# "ui.window"	#Borderlines separating splits
+# "ui.help"	#Description box for commands
+"ui.text" = { fg = "high_gray_1" }	#Command prompts, popup text, etc.
+# "ui.text.focus"	
+# "ui.text.inactive"	#Same as ui.text but when the text is inactive (e.g. suggestions)
+# "ui.text.info"	#The key: command text in ui.popup.info boxes
+# "ui.virtual.ruler"	#Ruler columns (see the editor.rulers config)
+# "ui.virtual.whitespace"	#Visible whitespace characters
+# "ui.virtual.indent-guide"	#Vertical indent width guides
+# "ui.virtual.inlay-hint"	#Default style for inlay hints of all kinds
+# "ui.virtual.inlay-hint.parameter"	#Style for inlay hints of kind parameter (LSPs are not required to set a kind)
+# "ui.virtual.inlay-hint.type"	#Style for inlay hints of kind type (LSPs are not required to set a kind)
+# "ui.virtual.wrap"	#Soft-wrap indicator (see the editor.soft-wrap config)
+# "ui.menu"	#Code and command completion menus
+# "ui.menu.selected"	#Selected autocomplete item
+# "ui.menu.scroll"	#fg sets thumb color, bg sets track color of scrollbar
+"ui.selection" = { bg = "middle_gray_2" }	#For selections in the editing area
+# "ui.selection.primary"	
+# "ui.highlight"	#Highlighted lines in the picker preview
+# "ui.cursorline.primary"	#The line of the primary cursor (if cursorline is enabled)
+# "ui.cursorline.secondary"	#The lines of any other cursors (if cursorline is enabled)
+# "ui.cursorcolumn.primary"	#The column of the primary cursor (if cursorcolumn is enabled)
+# "ui.cursorcolumn.secondary"	#The columns of any other cursors (if cursorcolumn is enabled)
+# "warning"	#Diagnostics warning (gutter)
+# "error"	#Diagnostics error (gutter)
+# "info"	#Diagnostics info (gutter)
+# "hint"	#Diagnostics hint (gutter)
+# "diagnostic"	#Diagnostics fallback style (editing area)
+# "diagnostic.hint"	#Diagnostics hint (editing area)
+# "diagnostic.info"	#Diagnostics info (editing area)
+# "diagnostic.warning"	#Diagnostics warning (editing area)
+# "diagnostic.error"	#Diagnostics error (editing area)
+
+[palette]
+high_gray_1="#e4e4e4"
+high_gray_2="#d0d0d0"
+high_gray_3="#b2b2b2"
+high_gray4="#8a8a8a"
+middle_gray_1="#6c6c6c"
+middle_gray_2="#4e4e4e"
+middle_gray_3="#3a3a3a"
+low_gray_1="#303030"
+low_gray_2="#262626"
+low_gray_3="#1c1c1c"
+background="#080808"
+high_purple="#af87ff"
+low_purple="#af5fff"
+high_green="#00ffaf"
+low_green="#00d7d7"
+high_red="#d75f87"
+low_red="#d7005f"
+diff_ghange="ffd700"
+cursor="#af8700"
+red="#d7005f"
+green="#00d7d7"
+yellow="#00ffaf"
+blue="#af5fff"
+magenta="#af87ff"
+cyan="#00d7d7"
+gray="#4e4e4e"
+light-red="#d75f87"
+light-green="#00d7d7"
+light-yellow="#00ffaf"
+light-blue="#af87ff"
+light-magenta="#af87ff"
+light-cyan="#00d7d7"
+light-gray="#e4e4e4"
+
+# https://github.com/jcherven/jummidark.vim
+#
+# |LIGHT                                           |DARK
+# | 256  | GUI hex   | Highlight    |              || 256  | GUI hex   | Highlight    |Jummidark
+# | value| value     | Name         |              || value| value     | Name         |Term NR-16
+# |---------------------------------| -----------------------------------------------------
+# |  254 | #e4e4e4   | highGray1    | background   ||  254 | #e4e4e4   | highGray1    | 7 LightGray, foreground
+# |  252 | #d0d0d0   | highGray2    |              ||  252 | #d0d0d0   | highGray2    |
+# |  249 | #b2b2b2   | highGray3    |              ||  249 | #b2b2b2   | highGray3    |
+# |  245 | #8a8a8a   | highGray4    | selection    ||  245 | #8a8a8a   | highGray4    | 15 White
+# |  242 | #6c6c6c   | middleGray1  |              ||  242 | #6c6c6c   | middleGray1  |
+# |  239 | #4e4e4e   | middleGray2  |              ||  239 | #4e4e4e   | middleGray2  | 8 DarkGray, selection
+# |  237 | #3a3a3a   | middleGray3  |              ||  237 | #3a3a3a   | middleGray3  |
+# |  236 | #303030   | lowGray1     |              ||  236 | #303030   | lowGray1     |
+# |  235 | #262626   | lowGray2     | foreground   ||  235 | #262626   | lowGray2     | background
+# |  234 | #1c1c1c   | lowGray3     |              ||  234 | #1c1c1c   | lowGray3     | 0 black
+# |  232 | #080808   | Background   |              ||  232 | #080808   | Background   |
+# |  135 | #af5fff   | highPurple   |              ||  141 | #af87ff   | highPurple   | 9 Blue, 5 DarkMagenta, 13 Magenta 
+# |   93 | #8700ff   | lowPurple    |              ||  135 | #af5fff   | lowPurple    | 1 DarkBlue
+# |   44 | #00d7d7   | highGreen    |              ||  049 | #00ffaf   | highGreen    | 6 Brown, 14 Yellow
+# |   30 | #008787   | lowGreen     |              ||  044 | #00d7d7   | lowGreen     | 2 Green, 10 DarkGreen, 3 DarkCyan, 11 Cyan
+# |  168 | #d75f87   | highRed      |              ||  168 | #d75f87   | highRed      | 12 Red
+# |  161 | #d7005f   | lowRed       |              ||  161 | #d7005f   | lowRed       | 4 DarkRed
+# |  220 | #ffd700   | Diff Change  |              ||  220 | #ffd700   | Diff Change  |
+# |  165 | #d700ff   | Cursor       | cursor       ||  136 | #af8700   | Cursor       | cursor

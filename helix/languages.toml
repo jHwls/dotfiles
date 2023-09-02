@@ -1,0 +1,40 @@
+[[language]]
+name = "astro"
+scope = "source.astro"
+file-types = ["astro"]
+auto-format = true
+language-servers = ["astro-ls"]
+
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+config = {typescript = {tsdk = "/Users/jhwls/.asdf/installs/nodejs/18.14.1/.npm/lib/node_modules/typescript/lib"}, environment = "node"}
+
+[[language]]
+name = "elixir"
+scope = "source.elixir"
+auto-format = true
+language-servers = ["lexical_local"]
+
+[language-server.lexical_local]
+command = "/Users/jhwls/repos/lexical/_build/dev/package/lexical/bin/start_lexical.sh"
+args = ["--stdio=true"]
+
+[language-server.lexical]
+command = "/Users/jhwls/repos/lexical-lsp/lexical/_build/dev/package/lexical/bin/start_lexical.sh"
+args = ["--stdio=true"]
+
+[language-server.nextls]
+command = "/opt/homebrew/bin/nextls"
+args = ["--stdio=true"]
+
+[[language]]
+name = "rust"
+scope = "source.rust"
+auto-format = true
+
+[[language]]
+name = "css"
+scope = "source.css"
+file-types = ["css"]
+auto-format = true
