@@ -1,33 +1,54 @@
+# Package managers
 brew "asdf"
-brew "autoconf"
-brew "exercism"
-brew "fish"
-brew "fswatch"
-brew "gh"
-brew "git"
-brew "git-lfs"
-brew "gpg"
-brew "jq"
-brew "navi"
-brew "neofetch"
-brew "openssl@1.1"
 brew "pnpm"
-brew "pgloader"
-brew "rename"
-brew "ripgrep"
+
+# Shells
+brew "fish"
+brew "nushell"
+
+# Prompt
 brew "starship"
-brew "tldr"
-brew "the_silver_searcher"
-brew "zellij"
+
+# Utilities
+brew "bat"
+brew "docker"
+brew "gpg"
+brew "mkcert"
+brew "pgloader"
+brew "ripgrep"
 brew "wget"
+brew "zoxide"
 
+# Vcs
+brew "git"
+brew "gh"
+
+# File system
+brew "fswatch"
+
+# Misc
+brew "exercism"
+
+# Casks
+cask "1password/tap/1password"
 cask "1password/tap/1password-cli"
-cask "alacritty"
-
+cask "clickup"
+cask "fork"
+cask "discord"
+cask "hiddenbar"
+cask "linear-linear"
 cask "ngrok"
+cask "obsidian"
+cask "orbstack"
+cask "postico"
+cask "protonmail-bridge"
+cask "protonvpn"
+cask "rio"
+cask "slack"
+# cask "timeular" Intel image
+cask "zed"
+cask "zoom"
 
-tap "nexeck/homebrew-tmuxinator"
-brew "nexeck/homebrew-tmuxinator/tmuxinator"
-
-tap "stripe/stripe-cli"
-brew "stripe/stripe-cli/stripe"
+# Firefox Developer Ed :)
+tap "homebrew/cask-versions"
+cask "firefox-developer-edition"

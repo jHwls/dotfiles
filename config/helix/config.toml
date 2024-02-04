@@ -1,7 +1,5 @@
 theme = "juumi_dark"
 
-[editor]
-
 [editor.lsp]
 display-messages = true
 display-inlay-hints = true
