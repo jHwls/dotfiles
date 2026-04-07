@@ -1,0 +1,90 @@
+[user]
+  name = Jack Howells
+  email = info@jhowells.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIEdNVKR7EbuRa7A8vetoKUXD9uZMGabjX6UKhMRRRrb
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[commit]
+  gpgsign = true
+
+[init]
+  defaultBranch = main
+
+[push]
+  default = current
+
+[color]
+  ui = auto
+
+[rebase]
+  updateRefs = true
+
+[merge]
+  ff = only
+
+[fetch]
+  prune = true
+
+[rebase]
+  autosquash = true
+
+[include]
+  path = ~/.gitconfig.local
+
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
+  ls = branch --list
+  a = add
+  aa = add --all
+  ap = add --patch
+  b = branch
+  c = commit
+  ci = commit -v
+  co = switch
+  cp = cherry-pick
+  new = switch -c
+  cur = rev-parse --abbrev-ref HEAD
+  s = status
+  p = push
+  fp = push --force-with-lease
+  fo = fetch origin --prune
+  rb = rebase
+  rbi = rebase -i
+
+[core]
+    editor = vim
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    features = unobtrusive-line-numbers
+    syntax-theme = none
+    file-style = none
+    file-decoration-style = none
+    hunk-header-style = file line-number
+    hunk-header-decoration-style = none
+    hunk-header-file-style = none
+    hunk-header-line-number-style = none
+    zero-style = "#777777"
+    file-modified-label = "M"
+    file-added-label = "A"
+    file-removed-label = "D"
+    file-renamed-label = "R"
+    hunk-label = "@@"
+
+[delta "unobtrusive-line-numbers"]
+    line-numbers = true
+    line-numbers-zero-style = "#444444"
+    line-numbers-left-format = "{nm:>4}"
+    line-numbers-right-format = "{np:>4}  "
+
+[merge]
+    conflictStyle = zdiff3

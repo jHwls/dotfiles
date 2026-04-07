@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+
+{{ if eq .chezmoi.os "darwin" }}
+brew install elvish nushell
+{{ end }}
+
+ELVISH=$(which elvish 2>/dev/null || echo "$HOME/.local/bin/elvish")
+NU=$(which nu 2>/dev/null || echo "$HOME/.local/bin/nu")
+
+# Register both in /etc/shells (required by chsh)
+for SHELL_BIN in "$ELVISH" "$NU"; do
+  if ! grep -qxF "$SHELL_BIN" /etc/shells; then
+    echo "$SHELL_BIN" | sudo tee -a /etc/shells
+  fi
+done
+
+# Set elvish as the default login shell
+chsh -s "$ELVISH"
+echo "Default shell set to elvish: $ELVISH"
+echo "Nushell also available at: $NU"

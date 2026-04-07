@@ -1,0 +1,8 @@
+# Editor swap/temp files
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+Brewfile.lock.json

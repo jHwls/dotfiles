@@ -1,0 +1,15 @@
+{{ if eq .chezmoi.os "linux" }}
+{{ $arch := "x86_64" }}
+{{ if eq .chezmoi.arch "arm64" }}{{ $arch = "aarch64" }}{{ end }}
+
+[".local/bin/elvish"]
+  type = "archive-file"
+  url = "https://dl.elv.sh/linux-{{ .chezmoi.arch }}/elvish-HEAD.tar.gz"
+  executable = true
+
+[".local/bin/nu"]
+  type = "archive-file"
+  url = "https://github.com/nushell/nushell/releases/download/0.101.0/nu-0.101.0-{{ $arch }}-unknown-linux-gnu.tar.gz"
+  path = "nu-0.101.0-{{ $arch }}-unknown-linux-gnu/nu"
+  executable = true
+{{ end }}
