@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
-
 {{ if eq .chezmoi.os "darwin" }}
-brew install elvish nushell
+# elvish + nushell come from the Brewfile; put brew on PATH so `which` finds them.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 {{ end }}
-
 ELVISH=$(which elvish 2>/dev/null || echo "$HOME/.local/bin/elvish")
 NU=$(which nu 2>/dev/null || echo "$HOME/.local/bin/nu")
 

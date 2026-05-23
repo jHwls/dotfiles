@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eu
+{{ if eq .chezmoi.os "darwin" -}}
+command -v brew >/dev/null 2>&1 && exit 0
+# Interactive: may prompt for sudo + RETURN, installs Command Line Tools if missing.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end -}}
