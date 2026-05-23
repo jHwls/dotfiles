@@ -1,0 +1,7 @@
+# Global tool versions — managed by chezmoi.
+# Per-project versions still come from each project's mise.toml / .tool-versions.
+[tools]
+node   = "24.16.0"        # current LTS
+erlang = "28.3"           # latest OTP 28 release
+elixir = "1.19.5-otp-28"  # latest stable; OTP 28 to match erlang
+rust   = "1.95.0"         # latest stable

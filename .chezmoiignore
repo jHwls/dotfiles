@@ -1,2 +1,9 @@
 Brewfile
 Brewfile.lock.json
+CHEATSHEET.md
+{{ if not (dig "mise" false .) }}
+.config/mise
+{{ end }}
+{{ if ne .chezmoi.os "darwin" }}
+Library
+{{ end }}
