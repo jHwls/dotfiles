@@ -1,0 +1,34 @@
+# Elvish rc — rendered by chezmoi from .chezmoidata/sh.yaml.
+
+# PATH
+set paths = [
+{{- range .paths }}
+  {{ . | replace "~" $.chezmoi.homeDir | squote }}
+{{- end }}
+{{- if eq .chezmoi.os "darwin" }}
+  /opt/homebrew/bin
+  /opt/homebrew/sbin
+{{- end }}
+  $@paths
+]
+{{ if dig "mise" false . }}
+# mise: manage runtime versions.
+var mise~ = (external mise)
+eval (mise activate elvish | slurp)
+{{ end }}
+# Environment
+{{- range $k, $v := .env }}
+set-env {{ $k }} {{ $v | replace "~" $.chezmoi.homeDir | squote }}
+{{- end }}
+{{- range $k, $v := (index .env_by_os .chezmoi.os) }}
+set-env {{ $k }} {{ $v | replace "~" $.chezmoi.homeDir | squote }}
+{{- end }}
+
+# Aliases — Elvish has no `alias`, so render as functions.
+{{- range $name, $cmd := .aliases }}
+fn {{ $name }} {|@a| {{ $cmd }} $@a }
+{{- end }}
+
+# Starship prompt. Upstream's elvish init omits --terminal-width, so the
+# $fill module can't right-align properly; patch it in via sed.
+eval (starship init elvish --print-full-init | sed 's|starship prompt|& --terminal-width=(e:tput cols)|g' | slurp)

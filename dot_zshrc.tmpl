@@ -1,0 +1,22 @@
+# ~/.zshrc — rendered by chezmoi from .chezmoidata/sh.yaml.
+
+# PATH
+typeset -U path PATH
+path=({{ range .paths }}{{ . | replace "~" $.chezmoi.homeDir | squote }} {{ end }}{{ if eq .chezmoi.os "darwin" }}/opt/homebrew/bin /opt/homebrew/sbin {{ end }}$path)
+{{ if dig "mise" false . }}
+# mise: manage runtime versions.
+eval "$(mise activate zsh)"
+{{ end }}
+# Environment
+{{- range $k, $v := .env }}
+export {{ $k }}={{ $v | replace "~" $.chezmoi.homeDir | squote }}
+{{- end }}
+{{- range $k, $v := (index .env_by_os .chezmoi.os) }}
+export {{ $k }}={{ $v | replace "~" $.chezmoi.homeDir | squote }}
+{{- end }}
+
+# Aliases
+[ -f ~/.config/zsh/aliases.zsh ] && source ~/.config/zsh/aliases.zsh
+
+# Starship prompt.
+eval "$(starship init zsh)"

@@ -1,0 +1,114 @@
+# Starship prompt — managed by chezmoi. https://starship.rs/config/
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = """
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$fill\
+$username\
+$shell\
+$time\
+$line_break\
+$python\
+${custom.char_elvish}\
+${custom.char_zsh_vicmd}\
+${custom.char_zsh_insert}\
+${custom.char_other}"""
+
+[fill]
+symbol = ' '
+
+[directory]
+style = "blue"
+
+# Username — always show, not just on root/SSH.
+[username]
+disabled = false
+show_always = true
+format = '[$user]($style) '
+style_user = 'bright-black'
+style_root = 'red'
+
+# Brackets are escaped because `[` is starship's style-segment opener.
+[shell]
+disabled = false
+format = '\[[$indicator]($style)\] '
+style = 'bright-black'
+zsh_indicator      = 'zsh'
+elvish_indicator   = 'elv'
+nu_indicator       = 'nu'
+unknown_indicator  = '?'
+
+[time]
+disabled = false
+format = '[$time]($style)'
+time_format = '%T'
+style = 'bright-black'
+
+# Replaced by per-shell custom modules below so each shell gets its own color.
+[character]
+disabled = true
+
+# Pin shell=['sh'] on every custom — starship's default is $STARSHIP_SHELL,
+# and nushell parses `[ ... ]` as a list literal that exits 0 unconditionally,
+# making every `when` "succeed" if we don't override.
+
+[custom.char_elvish]
+when    = '[ "$STARSHIP_SHELL" = "elvish" ]'
+command = 'printf ❯'
+shell   = ['sh']
+format  = '[$output](green) '
+
+# zsh splits into two so we keep the vi-command-mode indicator.
+# STARSHIP_KEYMAP is set by `starship init zsh` on each keymap change.
+[custom.char_zsh_insert]
+when    = '[ "$STARSHIP_SHELL" = "zsh" ] && [ "$STARSHIP_KEYMAP" != "vicmd" ]'
+command = 'printf ❯'
+shell   = ['sh']
+format  = '[$output](purple) '
+
+[custom.char_zsh_vicmd]
+when    = '[ "$STARSHIP_SHELL" = "zsh" ] && [ "$STARSHIP_KEYMAP" = "vicmd" ]'
+command = 'printf ❮'
+shell   = ['sh']
+format  = '[$output](green) '
+
+# Fallback for bash/fish/etc. Nushell intentionally absent — it draws its
+# own character via PROMPT_INDICATOR_VI_INSERT/NORMAL.
+[custom.char_other]
+when    = '[ "$STARSHIP_SHELL" != "elvish" ] && [ "$STARSHIP_SHELL" != "nu" ] && [ "$STARSHIP_SHELL" != "zsh" ]'
+command = 'printf ❯'
+shell   = ['sh']
+format  = '[$output](white) '
+
+[git_branch]
+format = "[$branch]($style)"
+style = "bright-black"
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+format = "[$virtualenv]($style) "
+style = "bright-black"
