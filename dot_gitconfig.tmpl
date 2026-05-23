@@ -3,12 +3,18 @@
   email = info@jhowells.com
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIEdNVKR7EbuRa7A8vetoKUXD9uZMGabjX6UKhMRRRrb
 
+# Sign commits with an SSH key. The signing key above lives in 1Password.
 [gpg]
   format = ssh
 
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS: hand signing to the 1Password desktop app (it holds the private key).
 [gpg "ssh"]
   program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
+{{ end -}}
+# On headless Linux gpg.ssh.program is left unset: git falls back to
+# `ssh-keygen`, which signs via the 1Password agent forwarded from my machine.
 [commit]
   gpgsign = true
 
