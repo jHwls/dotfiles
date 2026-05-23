@@ -12,4 +12,14 @@
   url = "https://github.com/nushell/nushell/releases/download/0.101.0/nu-0.101.0-{{ $arch }}-unknown-linux-gnu.tar.gz"
   path = "nu-0.101.0-{{ $arch }}-unknown-linux-gnu/nu"
   executable = true
+
+# 1Password CLI. No "latest" zip URL exists, so the version is pinned —
+# bump $opVersion to upgrade (releases: https://app-updates.agilebits.com/product_history/CLI2).
+{{ $opVersion := "2.34.0" }}
+[".local/bin/op"]
+  type = "archive-file"
+  url = "https://cache.agilebits.com/dist/1P/op2/pkg/v{{ $opVersion }}/op_linux_{{ .chezmoi.arch }}_v{{ $opVersion }}.zip"
+  path = "op"
+  executable = true
+  refreshPeriod = "168h"
 {{ end }}
