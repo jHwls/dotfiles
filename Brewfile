@@ -5,6 +5,9 @@
 brew "nushell"
 brew "elvish"
 
+# Multi-shell completion engine (git etc.)
+brew "carapace"
+
 # 1Password — app provides the SSH agent + op-ssh-sign; `op` is the CLI.
 cask "1password"
 cask "1password-cli"

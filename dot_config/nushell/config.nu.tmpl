@@ -79,6 +79,25 @@ $env.PROMPT_INDICATOR_VI_NORMAL = $"(ansi green)❮(ansi reset) "
 
 # Aliases (from .chezmoidata/sh.yaml)
 source ($nu.default-config-dir | path join "aliases.nu")
+{{ if eq .chezmoi.os "darwin" }}
+# carapace: multi-shell completions (git etc.). Aliases aren't expanded before the
+# external completer fires, so rewrite span 0 from the .aliases map first.
+let alias_map = {
+{{- range $name, $cmd := .aliases }}
+    "{{ $name }}": "{{ $cmd }}"
+{{- end }}
+}
+let carapace_completer = {|spans|
+    let cmd = ($alias_map | get -o $spans.0 | default $spans.0)
+    let spans = ([$cmd] | append ($spans | skip 1))
+    carapace $cmd nushell ...$spans | from json
+}
+$env.config.completions.external = {
+    enable: true
+    max_results: 100
+    completer: $carapace_completer
+}
+{{ end }}
 
 # starship prompt — init generated in env.nu
 use ~/.cache/starship/init.nu

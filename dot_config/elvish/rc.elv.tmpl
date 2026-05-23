@@ -28,6 +28,17 @@ set-env {{ $k }} {{ $v | replace "~" $.chezmoi.homeDir | squote }}
 {{- range $name, $cmd := .aliases }}
 fn {{ $name }} {|@a| {{ $cmd }} $@a }
 {{- end }}
+{{ if eq .chezmoi.os "darwin" }}
+# carapace: multi-shell completions (git etc.).
+eval (carapace _carapace|slurp)
+
+# Forward each alias-fn to its underlying command's completer so e.g. `g <Tab>` works.
+{{- range $name, $cmd := .aliases }}
+set edit:completion:arg-completer[{{ $name }}] = {|@a|
+    $edit:completion:arg-completer[{{ $cmd }}] {{ $cmd }} (all $a | drop 1)
+}
+{{- end }}
+{{ end }}
 
 # Starship prompt. Upstream's elvish init omits --terminal-width, so the
 # $fill module can't right-align properly; patch it in via sed.

@@ -17,6 +17,11 @@ export {{ $k }}={{ $v | replace "~" $.chezmoi.homeDir | squote }}
 
 # Aliases
 [ -f ~/.config/zsh/aliases.zsh ] && source ~/.config/zsh/aliases.zsh
-
+{{ if eq .chezmoi.os "darwin" }}
+# carapace: multi-shell completions (git etc.). Needs compinit + bashcompinit first.
+autoload -Uz +X compinit && compinit
+autoload -Uz +X bashcompinit && bashcompinit
+source <(carapace _carapace)
+{{ end }}
 # Starship prompt.
 eval "$(starship init zsh)"

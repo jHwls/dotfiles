@@ -14,7 +14,7 @@ for SHELL_BIN in "$ELVISH" "$NU"; do
   fi
 done
 
-# Set elvish as the default login shell
-chsh -s "$ELVISH"
-echo "Default shell set to elvish: $ELVISH"
-echo "Nushell also available at: $NU"
+# Set nushell as the default login shell
+chsh -s "$NU"
+echo "Default shell set to nushell: $NU"
+echo "Elvish also available at: $ELVISH"
