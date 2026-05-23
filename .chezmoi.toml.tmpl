@@ -1,0 +1,8 @@
+{{- $mise := promptBoolOnce . "mise" "Manage tool versions with mise" false -}}
+sourceDir = "~/repos/dotfiles"
+
+[git]
+    autoCommit = true
+
+[data]
+    mise = {{ $mise }}

@@ -1,0 +1,22 @@
+# Shared shell config — single source of truth.
+# Each shell's rc template renders these into that shell's native syntax.
+# Add an entry here, run `chezmoi apply`, and every shell picks it up.
+
+aliases:
+  cm: chezmoi
+  g: git
+
+env:
+  BAT_THEME: base16
+
+# OS-specific env, layered on top of `env`. Keyed by chezmoi's OS name.
+env_by_os:
+  darwin:
+    EDITOR: zed
+  linux:
+    EDITOR: vim
+
+# Prepended to PATH, in order. Homebrew's bin is added per-OS by each shell rc.
+paths:
+  - "~/.local/bin"
+  - "~/.cargo/bin"
