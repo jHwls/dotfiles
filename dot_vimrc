@@ -1,0 +1,82 @@
+" ~/.vimrc — slim, plugin-free config.
+"
+" 1. Settings
+" 2. Mappings
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 1. SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = "\<Space>"
+
+syntax on                            " Enable syntax highlighting
+
+set colorcolumn=+1                   " Mark the column past textwidth
+set hidden                           " Allow buffer change w/o saving
+set hlsearch                         " Highlight search results
+set laststatus=2                     " Always show the status line
+set nocompatible                     " Don't emulate Vi
+set number                           " Show line numbers
+set re=0                             " Auto-select the regexp engine
+set sessionoptions+=tabpages,globals " Persist tab names in sessions
+set shiftround                       " Round indent to a multiple of shiftwidth
+set shiftwidth=2                     " Spaces per indent step
+set smarttab                         " Tab respects shiftwidth and tabstop
+set splitbelow                       " New horizontal splits open below
+set splitright                       " New vertical splits open right
+set tabstop=2                        " Visible width of a tab
+set textwidth=120                    " Wrap guide at 120 columns
+
+" Keep swap files out of the working directory
+if !isdirectory($HOME . '/.vim/swp')
+	call mkdir($HOME . '/.vim/swp', 'p')
+endif
+set directory=$HOME/.vim/swp//
+
+" 256 colors in a terminal
+if !has("gui_running")
+	set t_Co=256
+endif
+
+" Quit help and quickfix windows with q
+autocmd FileType help nnoremap <buffer> q :q<CR>
+autocmd FileType qf   nnoremap <buffer> q :q<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 2. MAPPINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" jk / kj leave insert mode
+imap jk <esc>
+imap kj <esc>
+
+" Ctrl-s saves
+imap <C-s> <esc>:w<cr>
+
+" 0 goes to the first non-blank character
+nmap 0 ^
+
+" Move by visible lines when the current line is wrapped
+nmap j gj
+nmap k gk
+
+" Swap Q and q — stop recording macros by accident
+nnoremap Q q
+nnoremap q <Nop>
+
+" Reload this vimrc
+nmap <leader>so :source $MYVIMRC<cr>
+
+" Pre-populate a vertical split with the current directory
+nmap <leader>v :vnew <C-r>=escape(expand("%:p:h"), ' ') . '/'<cr>
+
+" Move the visual selection up or down a line
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Close the current buffer
+nnoremap <leader>q :bdelete<CR>

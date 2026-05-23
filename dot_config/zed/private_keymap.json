@@ -1,0 +1,72 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+	{
+		"context": "Workspace",
+		"bindings": {
+			"ctrl--": "terminal_panel::ToggleFocus",
+			"ctrl-=": "project_panel::ToggleFocus"
+		}
+	},
+	{
+		"context": "Pane",
+		"bindings": {
+			"ctrl--": "terminal_panel::ToggleFocus"
+		}
+	},
+	{
+		"context": "Terminal",
+		"bindings": {
+			"ctrl-u": "terminal::ScrollPageUp",
+			"ctrl-d": "terminal::ScrollPageDown"
+		}
+	},
+	{
+		// ctrl-shift-hjkl: move focus between panes
+		"bindings": {
+			"ctrl-shift-h": "workspace::ActivatePaneLeft",
+			"ctrl-shift-l": "workspace::ActivatePaneRight",
+			"ctrl-shift-k": "workspace::ActivatePaneUp",
+			"ctrl-shift-j": "workspace::ActivatePaneDown"
+		}
+	},
+	{
+		"context": "VimControl && !menu",
+		"bindings": {
+			// normal & visual mode bindings go here
+		}
+	},
+	{
+		"context": "vim_mode == insert",
+		"bindings": {
+			"j k": "vim::NormalBefore" // jk → escape
+		}
+	},
+	{
+		// same pane movement, also reachable from the docks
+		"context": "Dock",
+		"bindings": {
+			"ctrl-shift-h": "workspace::ActivatePaneLeft",
+			"ctrl-shift-l": "workspace::ActivatePaneRight",
+			"ctrl-shift-k": "workspace::ActivatePaneUp",
+			"ctrl-shift-j": "workspace::ActivatePaneDown"
+		}
+	},
+	{
+		// active when no editor is open
+		"context": "EmptyPane || SharedScreen",
+		"bindings": {
+			"space f": "file_finder::Toggle"
+		}
+	},
+	{
+		"bindings": {
+			"alt-cmd-`": "workspace::NewCenterTerminal"
+		}
+	}
+]
