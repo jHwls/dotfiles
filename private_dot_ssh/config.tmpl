@@ -1,0 +1,23 @@
+# ~/.ssh/config — managed by chezmoi (private_dot_ssh/config.tmpl).
+{{ if eq .chezmoi.os "darwin" -}}
+Include ~/.orbstack/ssh/config
+
+# Auth + git commit signing via SSH keys held in 1Password.
+# Needs the desktop app running with the agent enabled:
+#   1Password → Settings → Developer → "Use the SSH agent".
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# To use these keys on a headless machine, forward the agent to it — per-host,
+# never under `Host *` (that hands the agent to everything I connect to):
+#
+# Host my-server
+#   HostName 203.0.113.10
+#   User jhwls
+#   ForwardAgent yes
+{{ else -}}
+# Headless Linux — no local 1Password app, so no local SSH agent.
+# Auth + commit signing use the agent forwarded from my machine: connect
+# from a machine that sets `ForwardAgent yes` for this host, and
+# $SSH_AUTH_SOCK here exposes the 1Password keys automatically.
+{{ end -}}
