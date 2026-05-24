@@ -8,29 +8,72 @@
 // from the command palette or from `Zed` application menu.
 {
 	"icon_theme": "Zed (Default)",
- "features": {
-		"edit_prediction_provider": "none",
+	"features": {
+		"edit_prediction_provider": "none"
 	},
 	"base_keymap": "VSCode",
 	"vim_mode": true,
 	"vim": {
 		// "never" = system clipboard only with an explicit "+ / "* register
-		"use_system_clipboard": "never",
+		"use_system_clipboard": "never"
 	},
 	"theme": {
-  "mode": "system",
-  "light": "One Light",
-  "dark": "Xcode High Contrast Darker"
- },
+		"mode": "system",
+		"light": "One Light",
+		"dark": "Xcode High Contrast Darker"
+	},
 	"ui_font_size": 16,
 	"buffer_font_size": 16,
 	"hard_tabs": true,
 	"project_panel": {
-		"dock": "right",
+		"dock": "right"
+	},
+	// Declarative extension install list. Zed installs anything missing on
+	// launch; removing an entry does NOT uninstall — do that via the
+	// extensions panel.
+	"auto_install_extensions": {
+		"astro": true,
+		"biome": true,
+		"docker-compose": true,
+		"dockerfile": true,
+		"elixir": true,
+		"erlang": true,
+		"git-firefly": true,
+		"html": true,
+		"log": true,
+		"make": true,
+		"mermaid": true,
+		"nu": true,
+		"opentofu": true,
+		"oxc": true,
+		"php": true,
+		"ruby": true,
+		"scss": true,
+		"sql": true,
+		"svelte": true,
+		"swift": true,
+		"toml": true,
+		"wc-language-server": true,
+		"xcode-themes": true,
+		"xml": true
 	},
 	"languages": {
 		"Elixir": {
-			"language_servers": ["expert"],
+			"language_servers": ["expert"]
 		},
-	},
+		// Biome extension is installed but disabled by default. Per-project
+		// configs can opt back in with "language_servers": ["biome", "..."].
+		"JavaScript": { "language_servers": ["!biome", "..."] },
+		"JSX": { "language_servers": ["!biome", "..."] },
+		"TypeScript": { "language_servers": ["!biome", "..."] },
+		"TSX": { "language_servers": ["!biome", "..."] },
+		"Vue.js": { "language_servers": ["!biome", "..."] },
+		"Astro": { "language_servers": ["!biome", "..."] },
+		"Svelte": { "language_servers": ["!biome", "..."] },
+		"JSON": { "language_servers": ["!biome", "..."] },
+		"JSONC": { "language_servers": ["!biome", "..."] },
+		"CSS": { "language_servers": ["!biome", "..."] },
+		"GraphQL": { "language_servers": ["!biome", "..."] },
+		"HTML": { "language_servers": ["!biome", "..."] }
+	}
 }
