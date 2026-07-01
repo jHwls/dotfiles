@@ -9,6 +9,11 @@
 let mapleader = "\<Space>"
 
 syntax on                            " Enable syntax highlighting
+colorscheme lunaperche
+
+" Cursor shape: blinking bar in insert, steady block in normal, blinking underline in replace
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
 
 set colorcolumn=+1                   " Mark the column past textwidth
 set hidden                           " Allow buffer change w/o saving

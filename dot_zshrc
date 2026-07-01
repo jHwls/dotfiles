@@ -2,26 +2,30 @@
 
 # PATH
 typeset -U path PATH
-path=({{ range .paths }}{{ . | replace "~" $.chezmoi.homeDir | squote }} {{ end }}{{ if eq .chezmoi.os "darwin" }}/opt/homebrew/bin /opt/homebrew/sbin {{ end }}$path)
-{{ if dig "mise" false . }}
+path=('/Users/jhwls/.local/bin' '/Users/jhwls/.cargo/bin' /opt/homebrew/bin /opt/homebrew/sbin $path)
+
 # mise: manage runtime versions.
 eval "$(mise activate zsh)"
-{{ end }}
+
 # Environment
-{{- range $k, $v := .env }}
-export {{ $k }}={{ $v | replace "~" $.chezmoi.homeDir | squote }}
-{{- end }}
-{{- range $k, $v := (index .env_by_os .chezmoi.os) }}
-export {{ $k }}={{ $v | replace "~" $.chezmoi.homeDir | squote }}
-{{- end }}
+export BAT_THEME='base16'
+export EDITOR='zed'
 
 # Aliases
 [ -f ~/.config/zsh/aliases.zsh ] && source ~/.config/zsh/aliases.zsh
-{{ if eq .chezmoi.os "darwin" }}
+
 # carapace: multi-shell completions (git etc.). Needs compinit + bashcompinit first.
 autoload -Uz +X compinit && compinit
 autoload -Uz +X bashcompinit && bashcompinit
 source <(carapace _carapace)
-{{ end }}
+
 # Starship prompt.
 eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/jhwls/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
