@@ -7,26 +7,76 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-	"icon_theme": "Zed (Default)",
-	"features": {
-		"edit_prediction_provider": "none"
+	"bottom_dock_layout": "full",
+	"tabs": {
+		"git_status": false,
 	},
-	"base_keymap": "VSCode",
+	"title_bar": {
+		"show_menus": false,
+		"show_user_picture": false,
+		"show_user_menu": true,
+		"show_sign_in": false,
+	},
+	"search": {
+		"button": false,
+	},
+	"status_bar": {
+		"cursor_position_button": true,
+	},
+	"agent_buffer_font_size": 16.0,
+	"agent_ui_font_size": 18.0,
+	"show_edit_predictions": false,
+	"agent": {
+		"terminal_init_command": "claude",
+  "thinking_display": "auto",
+  "play_sound_when_agent_done": "never",
+  "notify_when_agent_waiting": "never",
+  "single_file_review": true,
+  "auto_compact": {
+   "enabled": false
+  },
+  "use_modifier_to_send": true,
+		"expand_terminal_card": false,
+		"favorite_models": [],
+		"model_parameters": [],
+		"enable_feedback": false,
+	},
+	"edit_predictions": {
+		"allow_data_collection": "no",
+		"provider": "none",
+	},
+	"diff_view_style": "unified",
+	"agent_servers": {
+		"claude-acp": {
+			"default_config_options": {
+				"mode": "acceptEdits",
+			},
+			"type": "registry",
+		},
+	},
+	"cli_default_open_behavior": "existing_window",
+	"icon_theme": "Zed (Default)",
+	"base_keymap": "Atom",
 	"vim_mode": true,
 	"vim": {
 		// "never" = system clipboard only with an explicit "+ / "* register
-		"use_system_clipboard": "never"
+		"use_system_clipboard": "never",
 	},
 	"theme": {
 		"mode": "system",
 		"light": "One Light",
-		"dark": "Xcode High Contrast Darker"
+		"dark": "Xcode High Contrast Darker",
 	},
 	"ui_font_size": 16,
 	"buffer_font_size": 16,
 	"hard_tabs": true,
 	"project_panel": {
-		"dock": "right"
+		"dock": "right",
+	},
+	"terminal": {
+		"toolbar": {
+			"breadcrumbs": false,
+		},
 	},
 	// Declarative extension install list. Zed installs anything missing on
 	// launch; removing an entry does NOT uninstall — do that via the
@@ -55,11 +105,15 @@
 		"toml": true,
 		"wc-language-server": true,
 		"xcode-themes": true,
-		"xml": true
+		"xml": true,
+	},
+	// Highlight WebC (.webc) as HTML — it's an HTML superset.
+	"file_types": {
+		"HTML": ["webc"],
 	},
 	"languages": {
 		"Elixir": {
-			"language_servers": ["expert"]
+			"language_servers": ["expert"],
 		},
 		// Biome extension is installed but disabled by default. Per-project
 		// configs can opt back in with "language_servers": ["biome", "..."].
@@ -74,6 +128,6 @@
 		"JSONC": { "language_servers": ["!biome", "..."] },
 		"CSS": { "language_servers": ["!biome", "..."] },
 		"GraphQL": { "language_servers": ["!biome", "..."] },
-		"HTML": { "language_servers": ["!biome", "..."] }
-	}
+		"HTML": { "language_servers": ["!biome", "..."] },
+	},
 }
