@@ -149,5 +149,17 @@
     3
    ]
   }
+ },
+ {
+  "context": "Editor",
+   "bindings": {
+   "ctrl-~ ctrl-~": "editor::ToggleBookmarkWithLabel"
+  }
+ },
+ {
+  "context": "Editor",
+   "bindings": {
+   "ctrl-` ctrl-`": "editor::ToggleBookmark"
+  }
  }
 ]

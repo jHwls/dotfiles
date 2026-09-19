@@ -7,3 +7,10 @@ CHEATSHEET.md
 {{ if ne .chezmoi.os "darwin" }}
 Library
 {{ end }}
+
+# Zed editor temp files (matched against target paths under $HOME)
+.config/zed/.tmp*
+.config/zed/conversations
+.config/zed/prompts
+.config/zed/themes
+.config/zed/settings_backup.json
