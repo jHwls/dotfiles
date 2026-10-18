@@ -21,7 +21,10 @@
 	},
 	"context_servers": {
 		"hub": {
-			"enabled": true,
+			"headers": {
+    "x-bf-vk": "sk-bf-f0441cae-465d-410c-afce-8498bef43c17"
+   },
+   "enabled": false,
 			"url": "http://localhost:3774/mcp"
 		}
 	},
@@ -171,7 +174,10 @@
 	"agent_ui_font_size": 18.0,
 	"show_edit_predictions": false,
 	"agent": {
-		"tool_permissions": {
+		"threads_sidebar": {
+   "position": "left"
+  },
+  "tool_permissions": {
 			"tools": {
 				"mcp:hub:listToolFiles": {
 					"default": "allow"
@@ -387,7 +393,6 @@
 		"default_profile": "build",
 		"max_content_width": 960.0,
 		"default_width": 640.0,
-		"sidebar_side": "left",
 		"dock": "left",
 		"flexible": true,
 		"terminal_init_command": "claude",
@@ -422,7 +427,7 @@
 			"default_config_options": {
 				"effort": "medium",
 				"fast": false,
-				"mode": "acceptEdits"
+				"mode": "auto"
 			},
 			"type": "registry"
 		}

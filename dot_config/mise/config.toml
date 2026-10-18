@@ -2,6 +2,6 @@
 # Per-project versions still come from each project's mise.toml / .tool-versions.
 [tools]
 node   = "24.16.0"        # current LTS
-erlang = "29.0.2"
-elixir = "1.20.2-otp-29"
+erlang = "29.0.6"
+elixir = "1.20.4-otp-29"
 rust   = "1.95.0"         # latest stable
