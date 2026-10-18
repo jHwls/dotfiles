@@ -1,12 +1,16 @@
 Brewfile
 Brewfile.lock.json
 CHEATSHEET.md
+README.md
 {{ if not (dig "mise" false .) }}
 .config/mise
 {{ end }}
 {{ if ne .chezmoi.os "darwin" }}
 Library
 {{ end }}
+
+# Created by hand; resolves 1Password op:// refs at run time (see README)
+.config/restic/r2.env
 
 # Zed editor temp files (matched against target paths under $HOME)
 .config/zed/.tmp*

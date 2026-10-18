@@ -1,0 +1,17 @@
+#!/bin/sh
+# Re-register the backup launchd agents when one of their plists changes.
+# The checksums below are rendered into the script body, and chezmoi re-runs
+# a run_onchange script whenever its contents change — so an edited plist
+# changes the checksum, which changes this script, which triggers the reload.
+# bootout of a not-currently-loaded agent fails; that is expected and ignored.
+
+# com.threespeed.docker-dbdump: {{ include "private_Library/LaunchAgents/com.threespeed.docker-dbdump.plist" | sha256sum }}
+# com.threespeed.restic.backup: {{ include "private_Library/LaunchAgents/com.threespeed.restic.backup.plist" | sha256sum }}
+# com.threespeed.restic.forget: {{ include "private_Library/LaunchAgents/com.threespeed.restic.forget.plist" | sha256sum }}
+
+uid=$(id -u)
+
+for label in com.threespeed.docker-dbdump com.threespeed.restic.backup com.threespeed.restic.forget; do
+  launchctl bootout "gui/$uid/$label" || true
+  launchctl bootstrap "gui/$uid" "$HOME/Library/LaunchAgents/$label.plist"
+done
