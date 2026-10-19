@@ -1,45 +1,78 @@
 # dotfiles
 
-chezmoi-managed macOS dotfiles. The source dir is this repo at
-`~/repos/dotfiles`; `CHEATSHEET.md` has the day-to-day chezmoi commands.
+> Howdy, stranger! This is Hauser. If things have gone wrong, I'm talking to myself and you don't have a wet towel around your head. Now, whatever your name is, get ready for the big surprise. You are not you, you're me.
 
-## Setup
+chezmoi-managed dotfiles: everything future me needs to get set up on a new
+machine. Any local or remote, macOS or Linux.
 
-Clone the repo to `~/repos/dotfiles`, then:
+The source dir is this repo at `~/repos/dotfiles` on the main machine;
+everywhere else chezmoi clones it to `~/.local/share/chezmoi`.
+`CHEATSHEET.md` has the day-to-day chezmoi commands, `BACKUPS.md` covers
+the backup chain.
 
-    chezmoi init    # regenerate ~/.config/chezmoi/chezmoi.toml from .chezmoi.toml.tmpl
-    chezmoi apply
+## Setting up main
 
-## Backups
+The repo is the chezmoi source dir and gets edited in place:
 
-Three launchd user agents run the nightly backup chain. Each posts macOS
-notifications and logs under `~/Library/Logs`:
+```sh
+git clone git@github.com:jHwls/dotfiles.git ~/repos/dotfiles
+chezmoi init --source ~/repos/dotfiles   # generate ~/.config/chezmoi/chezmoi.toml from .chezmoi.toml.tmpl
+chezmoi apply
+```
 
-| When | Script | launchd label |
+On an already-set-up main machine, plain `chezmoi init` regenerates the
+config — it reads the source dir from the existing config.
+
+## Remotes/containers
+
+Point chezmoi at the remote git and let it install, clone, generate the
+config, and apply in one step:
+
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply jHwls
+```
+
+With chezmoi already installed, that is just `chezmoi init --apply jHwls`.
+The source dir then lives in `~/.local/share/chezmoi`; `chezmoi update`
+pulls later changes from the remote.
+
+On a bare Debian/Ubuntu image, `curl` and the CA bundle come first:
+
+```sh
+apt-get update && apt-get install -y ca-certificates curl
+```
+
+Remotes get the shell and CLI config plus networking tools (curl, git,
+wget, dig, ping, traceroute, mtr, nc); no backup scripts and no launchd
+agents — those stay on the primary (`BACKUPS.md`).
+
+## Machine flags
+
+Two flags live in `[data]` of `~/.config/chezmoi/chezmoi.toml`, set when
+`chezmoi init` generates the config from `.chezmoi.toml.tmpl`:
+
+| Flag | Default | Controls |
 | --- | --- | --- |
-| daily 09:00 | `~/.local/bin/docker-db-dump.sh` | `com.threespeed.docker-dbdump` |
-| daily 09:30 | `~/.local/bin/restic-run.sh` | `com.threespeed.restic.backup` |
-| Sundays 10:00 | `~/.local/bin/restic-forget.sh` | `com.threespeed.restic.forget` |
+| `primary` | derived: the repo is cloned at `~/repos/dotfiles` | backup chain and launchd agents (primary only — `BACKUPS.md`); remote networking-tools script (non-primary Linux only) |
+| `mise` | `false` | `~/.config/mise` is managed and mise is installed (brew on macOS, mise.run otherwise) |
 
-- `docker-db-dump.sh` — logical `pg_dump` of the docker-managed databases
-  into `~/backups` (a file-level copy of the OrbStack disk image is torn
-  while containers run, so logical dumps are the backup mechanism).
-- `restic-run.sh` — restic backup of `~/repos` and `~/backups` to
-  Cloudflare R2.
-- `restic-forget.sh` — restic forget/prune, with the retention flags as
-  written in the script.
+An interactive `chezmoi init` asks once for each, with the primary default
+pre-derived from the clone. Non-interactive runs — containers, CI — take
+the defaults without prompting, which is how remotes stay light. Answers
+are stored, so re-running `chezmoi init` keeps them; to flip a flag, edit
+`[data]` in the config and `chezmoi apply`.
 
-The plists live in `private_Library/LaunchAgents/` and apply to
-`~/Library/LaunchAgents/`. The
-`dot_chezmoiscripts/run_onchange_after_30-reload-launchd-agents.sh.tmpl`
-script embeds each plist's checksum, so chezmoi re-runs it — a
-`launchctl bootout` + `bootstrap` of all three labels — whenever a plist
-changes.
+## Testing
 
-### ~/.config/restic/r2.env (created by hand)
+`test/linux-bootstrap.sh` checks the remote route end to end in a
+throwaway Linux container (docker required): prereqs, chezmoi install,
+`chezmoi init --apply` with the non-interactive remote defaults, then
+asserts the result — shell and CLI config applied, backup chain absent,
+all networking tools present, second apply a no-op. The current checkout
+is mounted read-only as the source dir, so the test always covers
+uncommitted changes.
 
-`r2.env` is created by hand and is not managed by chezmoi (it is listed in
-`.chezmoiignore`). It exports the restic repository and credentials that
-`restic-run.sh` and `restic-forget.sh` source at run time; secrets are
-1Password `op://` references, resolved by the 1Password CLI when the backup
-runs. Nothing under `.config/restic/` is committed to this repo.
+```sh
+test/linux-bootstrap.sh                        # debian:bookworm-slim, amd64
+test/linux-bootstrap.sh --image ubuntu:24.04   # also --platform linux/arm64, --keep
+```

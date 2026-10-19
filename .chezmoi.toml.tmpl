@@ -1,8 +1,15 @@
-{{- $mise := promptBoolOnce . "mise" "Manage tool versions with mise" false -}}
-sourceDir = "~/repos/dotfiles"
+{{- $primary := ne (len (glob (joinPath .chezmoi.homeDir "repos/dotfiles"))) 0 -}}
+{{- $mise := false -}}
+{{- if stdinIsATTY -}}
+{{- $mise = promptBoolOnce . "mise" "Manage tool versions with mise" false -}}
+{{- $primary = promptBoolOnce . "primary" "Is this your primary machine (backups, restic, launchd agents)?" $primary -}}
+{{- end -}}
+{{- if $primary }}sourceDir = "~/repos/dotfiles"
+{{- end }}
 
 [git]
     autoCommit = true
 
 [data]
+    primary = {{ $primary }}
     mise = {{ $mise }}

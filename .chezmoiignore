@@ -2,15 +2,14 @@ Brewfile
 Brewfile.lock.json
 CHEATSHEET.md
 README.md
-{{ if not (dig "mise" false .) }}
-.config/mise
-{{ end }}
-{{ if ne .chezmoi.os "darwin" }}
-Library
-{{ end }}
+BACKUPS.md
+test/
 
-# Created by hand; resolves 1Password op:// refs at run time (see README)
+# Created by hand; resolves 1Password op:// refs at run time (see BACKUPS.md)
 .config/restic/r2.env
+
+# Reference only — not applied to target homes
+.chezmoiexternal.toml.tmpl.inert
 
 # Zed editor temp files (matched against target paths under $HOME)
 .config/zed/.tmp*
@@ -18,3 +17,15 @@ Library
 .config/zed/prompts
 .config/zed/themes
 .config/zed/settings_backup.json
+
+{{ if not (dig "mise" false .) }}
+.config/mise
+{{ end }}
+{{ if or (not (dig "primary" false .)) (ne .chezmoi.os "darwin") }}
+Library
+{{ end }}
+{{ if not (dig "primary" false .) }}
+.local/bin/docker-db-dump.sh
+.local/bin/restic-run.sh
+.local/bin/restic-forget.sh
+{{ end }}

@@ -11,7 +11,9 @@
 
 uid=$(id -u)
 
+{{ if and (eq .chezmoi.os "darwin") (dig "primary" false .) }}
 for label in com.threespeed.docker-dbdump com.threespeed.restic.backup com.threespeed.restic.forget; do
   launchctl bootout "gui/$uid/$label" || true
   launchctl bootstrap "gui/$uid" "$HOME/Library/LaunchAgents/$label.plist"
 done
+{{ end }}

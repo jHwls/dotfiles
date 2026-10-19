@@ -1,0 +1,67 @@
+#!/bin/sh
+# Networking and troubleshooting tools for remote (non-primary) Linux
+# machines: curl, wget, git, dig/nslookup, ping, traceroute, mtr, nc, ss.
+# Package names differ per distro family; /etc/os-release decides. The
+# primary machine is skipped (macOS gets its toolset via the Brewfile).
+set -eu
+
+{{ if and (eq .chezmoi.os "linux") (not (dig "primary" false .)) -}}
+SUDO=""
+if [ "$(id -u)" -ne 0 ]; then
+  if command -v sudo >/dev/null 2>&1; then
+    SUDO="sudo"
+  else
+    echo "non-root and no sudo; cannot install packages" >&2
+    exit 1
+  fi
+fi
+
+ID=""
+ID_LIKE=""
+if [ -r /etc/os-release ]; then
+  . /etc/os-release
+fi
+
+# shellcheck disable=SC2086 — $pkgs and $SUDO are meant to word-split
+case "${ID:-} ${ID_LIKE:-}" in
+  *debian*|*ubuntu*)
+    pkgs="curl wget git dnsutils iputils-ping traceroute mtr-tiny netcat-openbsd iproute2"
+    ;;
+  *fedora*|*rhel*|*centos*)
+    pkgs="curl wget git bind-utils iputils traceroute mtr nmap-ncat iproute"
+    ;;
+  *arch*)
+    pkgs="curl wget git bind iputils traceroute mtr openbsd-netcat iproute2"
+    ;;
+  *alpine*)
+    # bash also: the other run_ scripts have #!/bin/bash shebangs
+    pkgs="curl wget git bind-tools iputils-ping traceroute mtr netcat-openbsd iproute2 bash"
+    ;;
+  *suse*)
+    pkgs="curl wget git bind-utils iputils traceroute mtr netcat-openbsd iproute2"
+    ;;
+  *)
+    echo "unknown distro family (ID=${ID:-unset} ID_LIKE=${ID_LIKE:-unset})" >&2
+    exit 1
+    ;;
+esac
+
+echo "installing networking tools: $pkgs"
+if command -v apt-get >/dev/null 2>&1; then
+  $SUDO apt-get update -qq
+  DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y -qq --no-install-recommends $pkgs
+elif command -v dnf >/dev/null 2>&1; then
+  $SUDO dnf install -y $pkgs
+elif command -v yum >/dev/null 2>&1; then
+  $SUDO yum install -y $pkgs
+elif command -v pacman >/dev/null 2>&1; then
+  $SUDO pacman -Sy --noconfirm --needed $pkgs
+elif command -v apk >/dev/null 2>&1; then
+  $SUDO apk add --no-cache $pkgs
+elif command -v zypper >/dev/null 2>&1; then
+  $SUDO zypper --non-interactive install $pkgs
+else
+  echo "no supported package manager found" >&2
+  exit 1
+fi
+{{ end -}}
